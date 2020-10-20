@@ -11,8 +11,15 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- script: ls $(Build.ArtifactStagingDirectory)
-  displayName: 'Run a one-line script'
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Write your commands here
+      
+      echo 'Hello world'
+      ls
+      echo $(Build.ArtifactStagingDirectory)
 
 - task: PublishBuildArtifacts@1
   inputs:
