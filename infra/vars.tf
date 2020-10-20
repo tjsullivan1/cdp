@@ -1,6 +1,7 @@
   
 variable "resource_group_name" {
   description = "The name for a resource group. This will allow us to get the other attributes necessary."
+  default = "rg-cdp-01-d"
 }
 
 variable "function_size" {
@@ -15,16 +16,18 @@ variable "function_tier" {
 
 variable "name" {
   description = "This name will be used with defaults as a unique identifier"
+  default = "cdp"
 }
 
 variable "env" {
   description = "An identifier for the environment. d for dev, t for test, p for prod"
+  default = "d"
 }
 
 variable "os" {
   type        = string
-  description = "Windows or Linux. Defaults to Windows."
-  default     = "windows"
+  description = "Windows or Linux. Defaults to Linux."
+  default     = "Linux"
 }
 
 variable "function_runtime_version" {
