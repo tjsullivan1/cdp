@@ -76,3 +76,32 @@ resource "azurerm_function_app" "function_win" {
     ENABLE_ORYX_BUILD = "true"
   }
 }
+
+resource "azurerm_cosmosdb_account" "db" {
+  name                = "cosmos-db-${var.name}-${var.env}"
+  location                   = data.azurerm_resource_group.rg.location
+  resource_group_name        = data.azurerm_resource_group.rg.name
+  offer_type          = "Standard"
+  kind                = "GlobalDocumentDB"
+
+  enable_automatic_failover = true
+
+  capabilities {
+    name = "EnableTable"
+  }
+
+  capabilities {
+    name = "EnableServerless"
+  }
+
+  consistency_policy {
+    consistency_level       = "BoundedStaleness"
+    max_interval_in_seconds = 10
+    max_staleness_prefix    = 200
+  }
+
+  geo_location {
+    location          = data.azurerm_resource_group.rg.location
+    failover_priority = 0
+  }
+}
