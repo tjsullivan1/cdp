@@ -69,26 +69,6 @@ resource "azurerm_function_app" "function_lin" {
   }
 }
 
-resource "azurerm_function_app" "function_win" {
-  count = (var.os == "linux"
-    ? 0
-  : 1)
-
-  name                       = "azfun-${var.name}-${var.env}"
-  location                   = data.azurerm_resource_group.rg.location
-  resource_group_name        = data.azurerm_resource_group.rg.name
-  app_service_plan_id        = azurerm_app_service_plan.asp.id
-  storage_account_access_key = azurerm_storage_account.funcstore.primary_access_key
-  storage_account_name       = azurerm_storage_account.funcstore.name
-  version                    = var.function_runtime_version
-
-  app_settings = {
-    APPINSIGHTS_INSTRUMENTATIONKEY = azurerm_application_insights.appin.instrumentation_key,
-    SCM_DO_BUILD_DURING_DEPLOYMENT = "true",
-    ENABLE_ORYX_BUILD = "true"
-  }
-}
-
 resource "azurerm_cosmosdb_account" "db" {
   name                = "cosmos-db-${var.name}-${var.env}"
   location                   = data.azurerm_resource_group.rg.location
