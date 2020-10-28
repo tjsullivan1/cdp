@@ -101,6 +101,6 @@ resource "azurerm_cosmosdb_account" "db" {
 
 resource "azurerm_key_vault_secret" "cosmos" {
   name         = "cosmos-connection-string"
-  value        = "szechuan"
+  value        = azurerm_cosmosdb_account.db.connection_strings[0]
   key_vault_id = data.azurerm_key_vault.kv.id
 }
