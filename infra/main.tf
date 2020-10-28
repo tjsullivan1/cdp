@@ -18,6 +18,10 @@ data "azurerm_resource_group" "rg" {
   name = var.resource_group_name
 }
 
+data "azurerm_key_vault" "kv" {
+  name = "kv-tjs-01"
+}
+
 resource "azurerm_storage_account" "funcstore" {
   name                     = "stor${var.name}${var.env}"
   resource_group_name      = data.azurerm_resource_group.rg.name
@@ -92,4 +96,10 @@ resource "azurerm_cosmosdb_account" "db" {
     location          = data.azurerm_resource_group.rg.location
     failover_priority = 0
   }
+}
+
+resource "azurerm_key_vault_secret" "cosmos_db_connection_string" {
+  name         = "cosmos_connection_string"
+  value        = "szechuan"
+  key_vault_id = data.azurerm_key_vault.kv.id
 }
