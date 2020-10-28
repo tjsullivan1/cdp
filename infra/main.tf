@@ -1,5 +1,17 @@
+terraform {
+  backend "remote" {
+    organization = "tjssullivanent"
+
+    workspaces {
+      name = "cdp"
+    }
+  }
+}
+
+# Configure the Azure provider
 provider "azurerm" {
-   features {}
+  version = "= 2.13.0"
+  features {}
 }
 
 data "azurerm_resource_group" "rg" {
