@@ -20,6 +20,7 @@ data "azurerm_resource_group" "rg" {
 
 data "azurerm_key_vault" "kv" {
   name = "kv-tjs-01"
+  resource_group_name = "rg-development-resources-01"
 }
 
 resource "azurerm_storage_account" "funcstore" {
