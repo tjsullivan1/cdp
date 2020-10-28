@@ -82,10 +82,6 @@ resource "azurerm_cosmosdb_account" "db" {
     name = "EnableTable"
   }
 
-  capabilities {
-    name = "EnableServerless"
-  }
-
   consistency_policy {
     consistency_level       = "BoundedStaleness"
     max_interval_in_seconds = 10
