@@ -27,7 +27,7 @@ variable "env" {
 variable "os" {
   type        = string
   description = "Windows or Linux. Defaults to Linux."
-  default     = "Linux"
+  default     = "linux"
 }
 
 variable "function_runtime_version" {
