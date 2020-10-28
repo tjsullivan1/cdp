@@ -99,7 +99,7 @@ resource "azurerm_cosmosdb_account" "db" {
   }
 }
 
-resource "azurerm_key_vault_secret" "cosmos_db_connection_string" {
+resource "azurerm_key_vault_secret" "cosmos" {
   name         = "cosmos_connection_string"
   value        = "szechuan"
   key_vault_id = data.azurerm_key_vault.kv.id
