@@ -4,5 +4,5 @@
 
 azure-functions
 azure-common
-azure-cosmosdb
+azure-cosmos
 azure-cosmosdb-table
