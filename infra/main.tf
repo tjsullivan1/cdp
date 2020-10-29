@@ -79,8 +79,9 @@ resource "azurerm_function_app" "function_lin" {
   app_settings = {
     APPINSIGHTS_INSTRUMENTATIONKEY = azurerm_application_insights.appin.instrumentation_key,
     SCM_DO_BUILD_DURING_DEPLOYMENT = "true",
-    ENABLE_ORYX_BUILD              = "true"
-    COSMOS_CXN_STRING              = "@Microsoft.KeyVault(VaultName=${data.azurerm_key_vault.kv.name};SecretName=cosmos-connection-string;SecretVersion=${azurerm_key_vault_secret.cosmos.version})"
+    ENABLE_ORYX_BUILD              = "true",
+    COSMOS_CXN_STRING              = "@Microsoft.KeyVault(VaultName=${data.azurerm_key_vault.kv.name};SecretName=cosmos-connection-string;SecretVersion=${azurerm_key_vault_secret.cosmos.version})",
+    FUNCTIONS_WORKER_RUNTIME = "python"
   }
 }
 
