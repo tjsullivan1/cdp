@@ -67,7 +67,7 @@ resource "azurerm_function_app" "function_lin" {
   os_type                    = var.os
   version                    = var.function_runtime_version
 
-  identity = {
+  identity {
     type = "SystemAssigned"
   }
 
