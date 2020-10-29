@@ -32,5 +32,5 @@ variable "os" {
 
 variable "function_runtime_version" {
   description = "What is the runtime version we want for this function?"
-  default     = "~2"
+  default     = "~3"
 }
