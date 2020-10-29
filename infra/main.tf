@@ -71,6 +71,11 @@ resource "azurerm_function_app" "function_lin" {
     type = "SystemAssigned"
   }
 
+  site_config {
+    linux_fx_version = "PYTHON|3.8"
+    use_32_bit_worker_process = false
+  }
+
   app_settings = {
     APPINSIGHTS_INSTRUMENTATIONKEY = azurerm_application_insights.appin.instrumentation_key,
     SCM_DO_BUILD_DURING_DEPLOYMENT = "true",
