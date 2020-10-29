@@ -126,3 +126,10 @@ resource "azurerm_key_vault_access_policy" "funcapp" {
     "get",
   ]
 }
+
+resource "azurerm_cosmosdb_table" "emotions" {
+  name                = "emortions"
+  resource_group_name = data.azurerm_resource_group.rg.name
+  account_name        = azurerm_cosmosdb_account.db.name
+  throughput          = 400
+}
