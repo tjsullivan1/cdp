@@ -12,12 +12,14 @@ steps:
     architecture: 'x64'
 
 - script: |
-    pip install --target="./.python_packages/lib/site-packages" -r ./app/requirements.txt
+    cd $(System.DefaultWorkingDirectory)/app
+    ls
+    pip install --target="./.python_packages/lib/site-packages" -r ./requirements.txt
   displayName: "Install requirements"
 - task: ArchiveFiles@2
   displayName: "Archive files"
   inputs:
-    rootFolderOrFile: "$(System.DefaultWorkingDirectory)"
+    rootFolderOrFile: "$(System.DefaultWorkingDirectory)/app"
     includeRootFolder: false
     archiveFile: "$(System.DefaultWorkingDirectory)/build$(Build.BuildId).zip"
 - task: PublishBuildArtifacts@1
