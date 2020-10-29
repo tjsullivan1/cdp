@@ -113,8 +113,8 @@ resource "azurerm_key_vault_secret" "cosmos" {
 resource "azurerm_key_vault_access_policy" "funcapp" {
   key_vault_id = data.azurerm_key_vault.kv.id
 
-  tenant_id = azurerm_function_app.function_lin.identity[0].tenant_id
-  object_id = azurerm_function_app.function_lin.identity[0].principal_id
+  tenant_id = azurerm_function_app.function_lin[0].identity[0].tenant_id
+  object_id = azurerm_function_app.function_lin[0].identity[0].principal_id
 
   secret_permissions = [
     "get",
