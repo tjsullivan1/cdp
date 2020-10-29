@@ -109,3 +109,14 @@ resource "azurerm_key_vault_secret" "cosmos" {
   value        = "DefaultEndpointsProtocol=https;${azurerm_cosmosdb_account.db.connection_strings[0]}TableEndpoint=https://${azurerm_cosmosdb_account.db.name}.table.cosmos.azure.com:443/;"
   key_vault_id = data.azurerm_key_vault.kv.id
 }
+
+resource "azurerm_key_vault_access_policy" "funcapp" {
+  key_vault_id = data.azurerm_key_vault.kv.id
+
+  tenant_id = azurerm_function_app.function_lin.identity.tenant_id
+  object_id = azurerm_function_app.function_lin.identity.principal_id
+
+  secret_permissions = [
+    "get",
+  ]
+}
