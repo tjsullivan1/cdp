@@ -1,7 +1,7 @@
-  
+
 variable "resource_group_name" {
   description = "The name for a resource group. This will allow us to get the other attributes necessary."
-  default = "rg-cdp-01-d"
+  default     = "rg-cdp-01-d"
 }
 
 variable "function_size" {
@@ -16,12 +16,12 @@ variable "function_tier" {
 
 variable "name" {
   description = "This name will be used with defaults as a unique identifier"
-  default = "cdp"
+  default     = "cdp"
 }
 
 variable "env" {
   description = "An identifier for the environment. d for dev, t for test, p for prod"
-  default = "d"
+  default     = "d"
 }
 
 variable "os" {
@@ -32,5 +32,5 @@ variable "os" {
 
 variable "function_runtime_version" {
   description = "What is the runtime version we want for this function?"
-  default = "~2"
+  default     = "~2"
 }

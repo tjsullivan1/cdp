@@ -19,7 +19,7 @@ data "azurerm_resource_group" "rg" {
 }
 
 data "azurerm_key_vault" "kv" {
-  name = "kv-tjs-01"
+  name                = "kv-tjs-01"
   resource_group_name = "rg-development-resources-01"
 }
 
@@ -67,17 +67,22 @@ resource "azurerm_function_app" "function_lin" {
   os_type                    = var.os
   version                    = var.function_runtime_version
 
+  identity = {
+    type = "SystemAssigned"
+  }
+
   app_settings = {
     APPINSIGHTS_INSTRUMENTATIONKEY = azurerm_application_insights.appin.instrumentation_key,
     SCM_DO_BUILD_DURING_DEPLOYMENT = "true",
-    ENABLE_ORYX_BUILD = "true"
+    ENABLE_ORYX_BUILD              = "true"
+    COSMOS_CXN_STRING              = "@Microsoft.KeyVault(VaultName=${data.azurerm_key_vault.kv.name};SecretName=cosmos-connection-string;SecretVersion=${azurerm_key_vault_secret.cosmos.version})"
   }
 }
 
 resource "azurerm_cosmosdb_account" "db" {
   name                = "cosmos-db-${var.name}-${var.env}"
-  location                   = data.azurerm_resource_group.rg.location
-  resource_group_name        = data.azurerm_resource_group.rg.name
+  location            = data.azurerm_resource_group.rg.location
+  resource_group_name = data.azurerm_resource_group.rg.name
   offer_type          = "Standard"
   kind                = "GlobalDocumentDB"
 
