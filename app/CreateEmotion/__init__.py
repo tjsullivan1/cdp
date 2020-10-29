@@ -1,5 +1,4 @@
 import logging
-import requests
 import uuid
 import datetime
 import json
@@ -20,7 +19,19 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         pass
 
     emotion = req_body.get('emotion')
+    if not emotion:
+        return func.HttpResponse(
+            "Client did not submit an emotion",
+            status_code=400
+        )
+
     activity = req_body.get('activity')
+    if not activity:
+        return func.HttpResponse(
+            "Client did not submit an activity",
+            status_code=400
+        )
+
     notes = req_body.get('notes')
     time_generated = datetime.datetime.now().timestamp()
 
