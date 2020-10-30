@@ -1,11 +1,5 @@
 name: 'CDP CICD'
 
-on:
-  push:
-    branches:
-    - main
-  pull_request:
-
 jobs:
  python:
     name: 'Deploy Python App'
