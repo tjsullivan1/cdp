@@ -112,7 +112,7 @@ resource "azurerm_cosmosdb_account" "db" {
 
 resource "azurerm_key_vault_secret" "cosmos" {
   name         = "cosmos-connection-string"
-  value        = "DefaultEndpointsProtocol=https;${azurerm_cosmosdb_account.db.connection_strings[0]}TableEndpoint=https://${azurerm_cosmosdb_account.db.name}.table.cosmos.azure.com:443/;"
+  value        = azurerm_cosmosdb_account.db.connection_strings[4]
   key_vault_id = data.azurerm_key_vault.kv.id
 }
 
